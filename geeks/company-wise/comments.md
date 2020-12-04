@@ -14,3 +14,4 @@
 
 Explanation: [Given an array arr[\], find the maximum j - i such that arr[j] > arr[i] - GeeksforGeeks](https://www.geeksforgeeks.org/given-an-array-arr-find-the-maximum-j-i-such-that-arrj-arri/)
 
+The above code throws time limit exceed error. Check the solution provided by geeksforgeeks on the question page. This solution makes a min and max array and finds the max difference using merge sort.

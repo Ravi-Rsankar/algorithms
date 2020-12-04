@@ -10,11 +10,11 @@ def maxIndexDiff(arr, n):
             j-=1
     return max
 
-
+# Using Binary search 
 def alternateSol(v, n):
     maxFromEnd = [-38749432] * (n + 1)
     for i in range(n - 1, 0, -1):
-        maxFromEnd[i] = max(maxFromEnd[i + 1], v[i])
+        maxFromEnd[i] = max(maxFromEnd[i+1], v[i])
     result = 0
     print(maxFromEnd)
     print(v)
@@ -41,7 +41,27 @@ def alternateSol(v, n):
         
     return result
 
+# Using Merge sort
+def finalSol(arr, n):
+    minArr = [0 for i in range(n)]
+    minArr[0] = arr[0]
+    for i in range (1, n):
+        minArr[i] = min(arr[i], minArr[i-1])
+    maxArr = [0 for i in range(n)]
+    maxArr[n-1] = arr[n-1]
+    for i in range(n-2, -1, -1):
+        maxArr[i] = max(arr[i], maxArr[i+1])
+    i, j, maxDiff = 0,0,0
+    
+    while i < len(minArr) and j < len(maxArr):
+        if minArr[i] <= maxArr[j]:
+            maxDiff = max(maxDiff, j-i)
+            j+=1
+        else:
+            i+=1
+    return maxDiff
+    
 arr = [34,8,10,3,2,80,30,33,1]
 n = len(arr)
-result = alternateSol(arr, n)
+result = finalSol(arr, n)
 print(result)
