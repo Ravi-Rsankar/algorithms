@@ -22,4 +22,4 @@ Explanation: https://www.youtube.com/watch?v=r0-zx5ejdq0
 
 ## Jumping Numbers
 
-Approach: Use the BFS or DFS approach to traverse all the jumping numbers.
+Approach: Use the BFS or DFS approach to traverse all the jumping numbers. In BFS push each jumping number into the queue if its less than the given number. Perform this till the queue is empty
