@@ -18,8 +18,12 @@ The above code throws time limit exceed error. Check the solution provided by ge
 
 ## Longest valid parentheses
 
+Use stack to solve this. keep pushing the brackets and when u get the `)` pop the stack if the stack has any `(`. To make sure that the stack is not empty add a constant say `-1` while initializing the stack
+
 Explanation: https://www.youtube.com/watch?v=r0-zx5ejdq0
 
 ## Jumping Numbers
 
 Approach: Use the BFS or DFS approach to traverse all the jumping numbers. In BFS push each jumping number into the queue if its less than the given number. Perform this till the queue is empty
+
+While checking if list is empty, always use `list == []` instead of using `len(list)==0`. The later takes more time than the former and I got a time exceeded error when I used the `len()` function to check. 
