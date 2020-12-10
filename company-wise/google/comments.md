@@ -41,4 +41,16 @@ Once the nodes in the immediate next level is connected then move the pointer to
 
 The above approach gave wrong output for certain cases. On checking the solution in [geeksforgeeks](https://practice.geeksforgeeks.org/problems/connect-nodes-at-same-level/1), the nodes are right away pushed into a list and while the list is not empty, loop through the list and check if the element is the last node in the list. If not then assign the next element i.e., `list[1]` as the `next` of the current node. 
 
-Check if the node has left and right child. If yes then push them to the list. At the end pop the current element `pop(0)` from the list. This
+Check if the node has left and right child. If yes then push them to the list. At the end pop the current element `pop(0)` from the list. 
+
+## Count BST nodes within a given range
+
+Three check needs to be performed. 
+
+1. If the data is within the range of the low and high value, then increment 1 and recur for both `right` and `left` node.
+2. If the data is greater than the high, then recur for the `left` child 
+3. If the data is less than the low, then recur for the `right` child.
+
+Optionally to improve the efficiency, check if the data is equal to high and low values. This mean the low and high are same. If it is then return 1.
+
+The count will be incremented on the first case where the recursion for `right` and `left` happens before incrementing thus returning sum of `1 + recursion of right + recursion of left`. 
