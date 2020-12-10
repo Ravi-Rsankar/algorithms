@@ -1,10 +1,3 @@
-# Python3 program to connect nodes at same  
-# level using extended pre-order traversal  
-  
-class newnode: 
-    def __init__(self, data): 
-        self.data = data 
-        self.left = self.right = self.nextRight = None
 
 def connect(root): 
     # Node node = root
