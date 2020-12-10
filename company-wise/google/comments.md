@@ -26,4 +26,19 @@ Explanation: https://www.youtube.com/watch?v=r0-zx5ejdq0
 
 Approach: Use the BFS or DFS approach to traverse all the jumping numbers. In BFS push each jumping number into the queue if its less than the given number. Perform this till the queue is empty
 
-While checking if list is empty, always use `list == []` instead of using `len(list)==0`. The later takes more time than the former and I got a time exceeded error when I used the `len()` function to check. 
+> While checking if list is empty, always use `list == []` instead of using `len(list)==0`. The later takes more time than the former and I got a time exceeded error when I used the `len()` function to check. 
+>
+
+## Connect nodes at same level
+
+For a given tree, the left child of the root need to be connected to the right child. At any given level, all the nodes needs to be connected and the last node in each level will be pointing to null. 
+
+A specific property `next` will be provided to keep track of the next node. Apart from this variable the node will have `left` and `right` properties. The `next` should be made to point to the next node on the same level.
+
+For any given node, check if the node is not null and the node has a level below. While it has a level below then connect all the nodes in level below.  To do so, have a `pointer`(initialize a `node` from the `root`) which keeps moving right once the child nodes are connected. The  `next` of the `left` node will be pointing to the `right` node. Here there is a special case to be handled by the pointer when it comes to the last node in a level. Since the last node points to null, its `next` need not have to be updated and it remains `null`. So check if the `next` of a node is null and then connect the right node. If the `next` of the current node is not null, then `next` of the `right` node will be `left` node of the current node's `next`. Follow the [Video](https://www.youtube.com/watch?v=bmjAiDsIDas) to get more clarity. 
+
+Once the nodes in the immediate next level is connected then move the pointer to the left of the root making it the root for the next iteration. 
+
+The above approach gave wrong output for certain cases. On checking the solution in [geeksforgeeks](https://practice.geeksforgeeks.org/problems/connect-nodes-at-same-level/1), the nodes are right away pushed into a list and while the list is not empty, loop through the list and check if the element is the last node in the list. If not then assign the next element i.e., `list[1]` as the `next` of the current node. 
+
+Check if the node has left and right child. If yes then push them to the list. At the end pop the current element `pop(0)` from the list. This

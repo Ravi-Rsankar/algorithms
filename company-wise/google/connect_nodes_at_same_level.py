@@ -5,84 +5,38 @@ class newnode:
     def __init__(self, data): 
         self.data = data 
         self.left = self.right = self.nextRight = None
-          
-# Sets the nextRight of root and calls  
-# connectRecur() for other nodes  
-def connect (p): 
-      
-    # Set the nextRight for root  
-    p.nextRight = None
-  
-    # Set the next right for rest of 
-    # the nodes (other than root)  
-    connectRecur(p) 
-  
-# Set next right of all descendents of p.  
-# Assumption: p is a compete binary tree  
-def connectRecur(p): 
-      
-    # Base case  
-    if (not p): 
-        return
-      
-    # Set the nextRight pointer for p's  
-    # left child  
-    if (p.left):  
-        p.left.nextRight = p.right  
-      
-    # Set the nextRight pointer for p's right 
-    # child p.nextRight will be None if p is  
-    # the right most child at its level  
-    if (p.right): 
-        # if p.nextRight: 
-            # p.right.nextRight = p.nextRight.left 
-        # else: 
-        p.right.nextRight = None
-      
-    # Set nextRight for other nodes in 
-    # pre order fashion  
-    connectRecur(p.left)  
-    connectRecur(p.right) 
-  
-# Driver Code 
-if __name__ == '__main__': 
-  
-    # Constructed binary tree is  
-    # 10  
-    #     / \  
-    # 8     2  
-    # /  
-    # 3  
-    root = newnode(10)  
-    root.left = newnode(8) 
-    root.right = newnode(2)  
-    root.left.left = newnode(3)
-    # root.left.right = newnode(60)
-  
-    # Populates nextRight pointer in all nodes  
-    connect(root)  
-  
-    # Let us check the values of nextRight pointers  
-    print("Following are populated nextRight",  
-          "pointers in the tree (-1 is printed", 
-                    "if there is no nextRight)") 
-    print("nextRight of", root.data, "is ", end = "") 
-    if root.nextRight: 
-        print(root.nextRight.data) 
-    else: 
-        print(-1) 
-    print("nextRight of", root.left.data, "is ", end = "")  
-    if root.left.nextRight: 
-        print(root.left.nextRight.data) 
-    else: 
-        print(-1) 
-    print("nextRight of", root.right.data, "is ", end = "")  
-    if root.right.nextRight: 
-        print(root.right.nextRight.data) 
-    else: 
-        print(-1) 
-    print("nextRight of", root.left.left.data, "is ", end = "")  
-    if root.left.left.nextRight: 
-        print(root.left.left.nextRight.data) 
-    else: 
-        print(-1) 
+
+def connect(root): 
+    # Node node = root
+    while(root != None and root.left != None):
+        while(root != None):
+            root.left.nextRight = root.right
+            if (root.nextRight != None):
+                root.right.nextRight = root.nextRight.left
+            root = root.nextRight
+        # Moving to the next level
+        root = root.left
+    return root
+
+# Solution from GeeksForGeeks
+def connect(root):
+    '''
+    :param root: root of the given tree
+    :return: none, just connect accordingly.
+    '''
+    q = [] # our queue to be used
+    q.append(root)
+
+    while len(q):
+        curr_level_size = len(q) # no of nodes in current level
+        for i in range(curr_level_size):
+            curr_node = q[0]
+            if i != curr_level_size-1:     # if this is not the last node at this level, update its nextRight
+                curr_node.nextRight = q[1]
+
+            if curr_node.left:  # put left child in queue
+                q.append(curr_node.left)
+            if curr_node.right:  # put right child in queue
+                q.append(curr_node.right)
+
+            q.pop(0) # pop from queue
